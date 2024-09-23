@@ -1,0 +1,27 @@
+environment: development
+
+# Container runtime
+container_runtime: docker
+
+# Orchestration platform  
+orchestration_platform: kubernetes
+
+# CI/CD tool
+cicd_tool: jenkins
+
+# Dependencies
+dependencies:
+  - docker
+  - kubectl
+  - helm
+  - jenkins-cli
+
+# Database
+database:
+  host: localhost
+  port: 27017
+  name: myapp
+
+# Application 
+app:
+  port: 8080

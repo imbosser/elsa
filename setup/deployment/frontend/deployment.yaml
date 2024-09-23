@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hackathon-starter-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hackathon-starter-frontend
+  template:
+    metadata:
+      labels:
+        app: hackathon-starter-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: ${DOCKERHUB_USERNAME}/hackathon-starter-frontend:latest
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: app-config
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hackathon-starter-frontend
+spec:
+  selector:
+    app: hackathon-starter-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
